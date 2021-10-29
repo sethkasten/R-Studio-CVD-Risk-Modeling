@@ -1,0 +1,108 @@
+Random forest algorithm scoring methods
+
+SMOTE
+
+AUC score
+
+F1 score
+
+> train=DW3[250,]
+> View(train)
+> train2=DW3[2:250,]
+> View(train2)
+> train=DW3[1:250,]
+> View(train)
+> View(DW3)
+> test=DW3[251:308,]
+> View(test)
+> View(train)
+> View(test)
+
+data$Var = as.factor(data$Var)
+^ Sets Var to be a qualitative rather than continuous
+
+Data is defaulted to continuous
+
+data_set_size=floor(nrow(data)*.8)
+^ Sets 80% of data to testing
+index <- sample(1:nrow(data), size = data_set_size) 
+training <- data[index,]
+testing <- data[-index,]
+^ Sets the test and train sets
+
+rf <- randomForest(diabetes ~., data=training, mtry=<number of vars tried at each split, usu 4), ntree=<n of trees>, importance=TRUE)
+^ This step takes a little while to run
+
+rf
+^ outputs data
+
+plot(rf)
+^this plots some data
+
+result <- data.frame(test$diabetes, predict(rf, testing-,1:,<number of vars>], type = [response]
+
+result
+^ prints out the line, actual value, and predicted value
+
+plot(result)
+^plots the testing quality
+
+data=read.csv(file.choose())
+data$ï..Gen = as.factor(data$ï..Gen)
+binary <- c(3:8)
+data[,binary] <- lapply(data[,binary], factor)
+binarya <- c(16:39)
+data[,binarya] <- lapply(data[,binarya], factor)
+
+set.seed(1337)
+missForest(data, maxiter= <max number of iterations to be performed given the stopping criterion is not met beforehand>, ntree=2001, variablewise=TRUE,decreasing=FALSE,verbose=TRUE,mtry=floor(sqrt(ncol(data))),replace=TRUE, xtrue= data)
+
+Arthritis
+
+             Estimate Std. Error z value Pr(>|z|)    
+(Intercept) -2.346104   0.158043 -14.845  < 2e-16 ***
+Gen1        -0.748286   0.048398 -15.461  < 2e-16 ***
+Smoke19931  -0.059342   0.064606  -0.919    0.358    
+BMI1993      0.084056   0.006005  13.997  < 2e-16 ***
+HC19931      0.388217   0.047820   8.118 4.72e-16 ***
+HT19931      0.341375   0.058423   5.843 5.12e-09 ***
+
+X-squared = 18.293, df = 8, p-value = 0.01913
+
+COPD
+
+            Estimate Std. Error z value Pr(>|z|)    
+(Intercept) -4.04299    0.29059 -13.913  < 2e-16 ***
+Gen1        -0.21011    0.09341  -2.249 0.024493 *  
+Smoke19931   0.95911    0.10398   9.224  < 2e-16 ***
+BMI1993      0.04534    0.01061   4.275 1.91e-05 ***
+HC19931     -0.07818    0.09391  -0.833 0.405102    
+HT19931      0.36214    0.10686   3.389 0.000702 ***
+Diab19931   -0.43584    0.28574  -1.525 0.127189    
+
+X-squared = 10.898, df = 8, p-value = 0.2076
+
+Depression
+
+             Estimate Std. Error z value Pr(>|z|)    
+(Intercept) -1.857389   0.156862 -11.841  < 2e-16 ***
+Gen1        -0.340087   0.049068  -6.931 4.18e-12 ***
+Smoke19931   0.388879   0.064436   6.035 1.59e-09 ***
+BMI1993      0.039908   0.005875   6.793 1.09e-11 ***
+HC19931      0.258545   0.049230   5.252 1.51e-07 ***
+HT19931      0.310812   0.058744   5.291 1.22e-07 ***
+Diab19931    0.322393   0.133332   2.418   0.0156 *  
+
+X-squared = 8.9914, df = 8, p-value = 0.343
+
+Diabetes
+
+             Estimate Std. Error z value Pr(>|z|)    
+(Intercept) -8.144575   0.283184 -28.761  < 2e-16 ***
+Gen1         0.284981   0.083422   3.416 0.000635 ***
+Smoke19931   0.165925   0.117915   1.407 0.159382    
+BMI1993      0.192086   0.009306  20.640  < 2e-16 ***
+HC19931      0.273595   0.086242   3.172 0.001512 ** 
+HT19931      0.490982   0.089138   5.508 3.63e-08 ***
+
+X-squared = 24.747, df = 8, p-value = 0.001715
